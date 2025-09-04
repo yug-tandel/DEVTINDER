@@ -1,14 +1,20 @@
 const express = require("express");  //This imports the Express.js library into your file so you can use it.
 
 const app = express(); // This creates a single instance of an Express application that defines your server and its behavior.
+const { adminAuth } = require("./middlewares/auth")
 
-app.use("/", (req, res) =>{
-    res.send("Handling / Route");
-})
+app.use("/admin", adminAuth ); 
 
 app.get("/user", (req, res, next) =>{
-    console.log("/ User")
-    res.send("2nd Route Handler");
+    res.send("User data Sent")
+})
+
+app.get("/admin/getAllData", (req, res, next) =>{
+     res.send("All Data Sent");
+})
+
+app.get("/admin/deleteUser", (req, res, next) =>{
+    res.send("Deleted a user");
 })
 
 

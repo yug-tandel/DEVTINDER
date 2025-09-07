@@ -50,6 +50,34 @@ app.get("/feed", async (req, res) =>{
 })
 
 
+//Delete user
+app.delete("/deleteUser", async (req, res) =>{
+    const userId = req.body.userId;
+    console.log(userId)
+    try{
+       await User.findByIdAndDelete({_id: userId})
+       res.send("User deleted successfully");
+    } catch(err){
+        res.status(400).send("something went wrong")
+    }
+
+})
+
+
+
+//Update
+app.patch("/updateUser", async (req, res) =>{
+    const userId = req.body.userId;
+    const data = req.body;
+    try{
+        const user = await User.findByIdAndUpdate({_id: userId}, data)
+        res.send("data updated successfully");
+    } catch(err) {
+        res.status(404).send("something went wrong")
+    }
+})
+
+
 
 
 
